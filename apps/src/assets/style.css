@@ -1,0 +1,38 @@
+.list-users{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+
+  .parent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list-items{
+    border-radius: 5px;
+    padding: 13px;
+    list-style: none;
+    border: 1px solid white
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 5px;
+  }
+  .input-fields{
+    padding: 10px;
+    color: black;
+    background: whitesmoke;
+  }
+
+  .sumbit{
+    margin-left: 10px;
+  }
+  .update-buttons{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
