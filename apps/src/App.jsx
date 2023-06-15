@@ -29,6 +29,8 @@ const App = () => {
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [editName, setEditName] = useState("");
   const [editEmail, setEditEmail] = useState("");
 
@@ -48,14 +50,41 @@ const App = () => {
 
   const handleCreateUser = (event) => {
     event.preventDefault();
-    const newUser = {
-      name: event.target.name.value,
-      email: event.target.email.value,
+    const nameRegex = /^[a-zA-Z]+$/;
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (!name.match(nameRegex)) {
+      alert("Invalid name format. Name must contain only string characters.");
+      return;
+    }
+
+    if (!email.match(emailRegex)) {
+      alert("Invalid email format.");
+      return;
+    }
+
+    let newUser = {
+      name: name,
+      email: email,
     };
     createUserMutation.mutate(newUser);
+    setEmail("");
+    setName("");
   };
 
   const handleUpdateUser = () => {
+    const nameRegex = /^[a-zA-Z]+$/;
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (!editName.match(nameRegex)) {
+      alert("Invalid name format. Name must contain only string characters.");
+      return;
+    }
+
+    if (!editEmail.match(emailRegex)) {
+      alert("Invalid email format.");
+      return;
+    }
     const updatedUser = {
       id: selectedUser.id,
       name: editName,
@@ -112,6 +141,8 @@ const App = () => {
             <input
               type="text"
               name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Name"
               required
               className="input-fields"
@@ -119,6 +150,8 @@ const App = () => {
             <input
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
               className="input-fields"
